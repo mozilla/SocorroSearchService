@@ -1,0 +1,21 @@
+{
+    "cluster" : {
+        "name" : "socorro"
+    },
+    "path" : {
+        "data" : "./sss.es/"
+    },
+    "gateway" : {
+        "type" : "local",
+        "recover_after_nodes" : 1,
+        "recover_after_time" : "5m",
+        "expected_nodes" : 1
+    },
+    "index" : {
+		"number_of_replicas":0, 
+         "mapper" : {
+            "default_mapping_location" : "socorro_mapping.json"
+          }
+    }
+    
+}

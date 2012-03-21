@@ -1,0 +1,56 @@
+{
+    "_default_": {
+        "date_formats": [
+            "yyyy-MM-dd HH:mm:ss.SSSSSS"
+        ],
+"_source" : {"compress" : true},
+        "properties": {
+            "completeddatetime": {
+                "format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+                "type": "date"
+            },
+            "date_processed": {
+                "format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+                "type": "date"
+            },
+            "client_crash_date": {
+                "format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+                "type": "date"
+            },
+            "build_date": {
+                "format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+                "type": "date"
+            },
+            "startedDateTime": {
+                "format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+                "type": "date"
+            },
+            "signature": {
+                "type": "multi_field",
+                "fields": {
+                    "signature": {
+                        "type": "string",
+                        "index": "analyzed"
+                    },
+                    "full": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    }
+                }
+            },
+            "product": {
+                "type": "multi_field",
+                "fields": {
+                    "product": {
+                        "type": "string",
+                        "index": "analyzed"
+                    },
+                    "full": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    }
+                }
+            }
+        }
+    }
+}
