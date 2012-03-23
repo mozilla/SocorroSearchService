@@ -14,7 +14,7 @@ bin=`cd "$bin"; pwd`
 SERVER_PORT=$1
 HAZELCAST_CONF=$2
 SERVER_CLASS_NAME="com.mozilla.bagheera.rest.Bagheera"
-JAVA_OPTS="-Xms16g -Xmx32g -XX:+UseParNewGC -XX:+UseConcMarkSweepGC"
+JAVA_OPTS="-Xms512m -Xmx32g -XX:+UseParNewGC -XX:+UseConcMarkSweepGC"
 
 HBASE_CONF=conf/
 
