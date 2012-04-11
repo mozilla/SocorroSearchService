@@ -145,6 +145,7 @@ public class ElasticSearchIndexMapStore implements MapStore<String, String>, Map
 			if (StringUtils.isNotBlank(row)) {
 				rowIds.add(row);
 				if (rowIds.size() % 100 == 0) {
+					LOG.debug("batch size greater than 100");
 					LOG.info("map size: " + pairs.size());
 					indexJsons(rowIds);
 					rowIds.clear();
@@ -152,8 +153,10 @@ public class ElasticSearchIndexMapStore implements MapStore<String, String>, Map
 			}
 		}
 		if (rowIds.size() > 0) {
+			LOG.debug("batch size less than 100");
 			LOG.info("map size: " + pairs.size());      
 			indexJsons(rowIds);
+			rowIds.clear();
 		}
 
 	}
@@ -163,6 +166,8 @@ public class ElasticSearchIndexMapStore implements MapStore<String, String>, Map
 		Map<String, String> fetchedJsons = table.multipleGets(rowIds);
 
 		LOG.info("Total # of docs getting indexed inside ElasticSearch: " + rowIds.size());
+		LOG.info("Total # of docs successfully fetched from hbase: " + fetchedJsons.size());
+		
 		if (fetchedJsons.size() > 0) {
 			if (es.indexBulkDocument(fetchedJsons)) {
 				LOG.debug("success indexing jsons inside ES, total count: " +fetchedJsons.size());

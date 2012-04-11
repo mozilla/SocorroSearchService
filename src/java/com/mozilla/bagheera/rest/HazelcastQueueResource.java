@@ -85,12 +85,13 @@ public class HazelcastQueueResource extends ResourceBase {
 		boolean success = true;
 
 		Map<String,String> m = Hazelcast.getMap(name);
-    try {
-      m.put(id, "");
-    } catch (Exception e) {
-      success = false;
-      LOG.error("Error adding object to map: " + e.getMessage());
-    }
+		try {
+			LOG.debug("Inside Hazelcast, inserting ooid: " + id);
+			m.put(id, id);
+		} catch (Exception e) {
+			success = false;
+			LOG.error("Error adding object to map: " + e.getMessage());
+		}
 
 		Response response = null;
 		if (success) {
@@ -99,7 +100,7 @@ public class HazelcastQueueResource extends ResourceBase {
 			LOG.error("error inserting elements: queueName: " + name + "\tid: " + id);
 			response = Response.status(Status.SERVICE_UNAVAILABLE).build();
 		}
-		
+
 		return response;
 	}
 
